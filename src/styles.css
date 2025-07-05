@@ -1,1 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
 @import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Oswald', sans-serif;
+}
+
+image-cropper {
+  --cropper-resize-square-bg: black;
+  --cropper-resize-square-border: none;
+
+  .ngx-ic-square {
+    width: 12px !important;
+    height: 12px !important;
+  }
+}

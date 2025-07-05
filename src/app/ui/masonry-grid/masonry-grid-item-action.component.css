@@ -1,0 +1,14 @@
+@reference "tailwindcss";
+
+:host {
+  /* General styles */
+  @apply w-full object-cover overflow-hidden cursor-pointer flex flex-col items-center justify-center h-44 rounded-lg border-2;
+
+  /* Text styles */
+  @apply text-2xl;
+
+  /* States */
+  @apply transition-transform duration-200 ease-in-out;
+  @apply hover:transform hover:scale-95;
+  @apply active:scale-105;
+}

@@ -1,0 +1,35 @@
+@if (item(); as item) {
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div>
+      <img class="w-full rounded-lg object-cover" loading="lazy" [src]="item.imageData" [alt]="item.title" />
+    </div>
+    <div>
+      <p>#{{ item.id }}</p>
+      <h1 class="text-4xl md:text-6xl font-bold mb-2">{{ item.title }}</h1>
+      <p class="text-xl md:text-2xl font-light mb-8">
+        {{ item.description }}
+      </p>
+      <div class="flex items-center gap-2">
+        <a app-button [routerLink]="['/', 'posters', 'edit', item.id]">Editar</a>
+        <button app-button appType="destructive" (click)="confirmDelete(deleteDialog)">Excluir</button>
+      </div>
+    </div>
+  </div>
+} @else if (loading()) {
+  <p class="text-4xl text-center py-8">Carregando...</p>
+} @else {
+  <p class="text-4xl text-center py-8">Poster não encontrado</p>
+}
+
+<ng-template #deleteDialog let-toastRef>
+  <div class="flex flex-col items-center gap-4">
+    <div>
+      Deseja realmente excluir o poster <span class="font-bold">{{ item()?.title }}</span
+      >?
+    </div>
+    <div class="flex gap-2">
+      <button app-button appType="destructive" (click)="deleteItem()">Excluir</button>
+      <button app-button appType="ghost" (click)="toastRef.close({ dismissedByAction: true })">Cancelar</button>
+    </div>
+  </div>
+</ng-template>

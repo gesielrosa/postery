@@ -1,0 +1,30 @@
+<div class="flex items-center justify-end gap-4 mb-4">
+  <button app-button appType="outline" (click)="onSortChange()">
+    {{ params().sort === 'desc' ? 'Mais recente primeiro' : 'Mais antigo primeiro' }}
+  </button>
+</div>
+@let posters = items();
+@if (posters.length) {
+  <div class="space-y-8">
+    <app-masonry-grid>
+      <a app-masonry-grid-item-action label="Adicionar poster" icon="images/icons/plus.svg" [routerLink]="['posters', 'add']"></a>
+      @for (poster of posters; track poster.id) {
+        <a app-masonry-grid-item [title]="poster.title" [imageSrc]="poster.imageData" [routerLink]="['posters', 'details', poster.id]"> </a>
+      }
+    </app-masonry-grid>
+    @if (hasNextPage()) {
+      <div class="flex justify-center">
+        <button app-button appType="outline" [disabled]="loading()" (click)="loadMore()">
+          {{ loading() ? 'Carregando...' : 'Carregar mais' }}
+        </button>
+      </div>
+    }
+  </div>
+} @else if (loading()) {
+  <p class="text-4xl text-center py-8">Carregando...</p>
+} @else {
+  <p class="text-4xl text-center py-8">Não há posters cadastrados ainda!</p>
+  <div class="flex justify-center">
+    <a app-button [routerLink]="['posters', 'add']">Adicionar poster</a>
+  </div>
+}
