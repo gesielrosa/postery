@@ -37,7 +37,7 @@ RUN npm ci --only=production && \
 COPY --from=builder /app/dist ./dist
 
 # Copy database file
-COPY db_backup.json ./
+COPY db.seed.json ./db.json
 
 # Create a simple script to run both json-server and serve the frontend
 RUN echo '#!/bin/sh' > start.sh && \
